@@ -49,21 +49,21 @@ section {
 
 section#header {
   background: #ffffff;
-  background: linear-gradient(164deg, rgba(123,134,232,1) 0%, rgba(246,140,255,1) 52%, rgba(255,222,50,1) 100%);
-  color: #270942;
+  background: linear-gradient(164deg, #fcbf77 0%, #b9d8fa 52%, #fce04e 100%);
+  color: #444444;
   min-height: 0px;
 }
 
 section#main-banner {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(123,211,232,1) 0%, rgba(123,211,232,1) 0%, rgba(50,171,255,1) 100%);
-  color: #0f2852;
+  color: #444444;
 }
 
 section#experience {
   background: #ffffff;
   background: linear-gradient(135deg, rgba(123,211,232,1) 0%, rgba(232,123,165,1) 0%, rgba(255,50,50,1) 100%);
-  color: #40081a;
+  color: #444444;
 }
 
 section#projects {
