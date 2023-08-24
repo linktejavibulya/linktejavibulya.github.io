@@ -56,7 +56,7 @@ section#header {
 
 section#main-banner {
   background: #ffffff;
-  background: linear-gradient(135deg, rgba(123,211,232,1) 0%, rgba(123,211,232,1) 0%, rgba(50,171,255,1) 100%);
+  background: linear-gradient(164deg, #fcbf77 0%, #b9d8fa 52%, #fce04e 100%);
   color: #444444;
 }
 
