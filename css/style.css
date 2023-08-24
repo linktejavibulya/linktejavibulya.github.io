@@ -18,6 +18,15 @@ body {
 	font-family: quicksand;
 }
 
+nav {
+	background-color: #242424;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	position: sticky;
+	top: 0px;
+}
+
 nav a {
 	color: #eeeeee;
 	text-decoration: none;
