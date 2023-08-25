@@ -11,40 +11,36 @@ body {
 
 #main-nav {
 	background-color: #eeeeee;
-  	text-align: center;
-  	width: 100%;
-  	position: relative;
-  	box-sizing: border-box;
-  	height: 60px;
+	padding: 10px;
+	text-align: center;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	box-sizing: border-box;
+	height: 45px;
 }
 
 nav a {
-  	color: white;
-  	text-decoration: none;
-  	margin: 0px 10px;
+	color: white;
+	text-decoration: none;
+	margin: 0px 10px;
+	padding: 5px;
 	transition: 0.3s;
 }
 
-nav a:hover {
-  	text-decoration: underline;
-}
-
 #main-nav.sticky {
-  	position: fixed;
-  	top: 0;
-}
-
-.navbarOffsetMargin {
-  	padding-top: 0px;
+	position: fixed;
+	top: 0;
 }
 
 nav a.active {
-  	color: #1e1e1e;
-  	background: white;
+	color: #1e1e1e;
+	background: white;
 }
 
 nav a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
+	opacity: 0.6;
 }
 
 section {
