@@ -14,7 +14,7 @@ body {
 	background-color: #eeeeee;
 	text-align: center;
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	box-sizing: border-box;
 	height: 80px;
@@ -80,7 +80,6 @@ section#contact {
 article {
   width: 100%;
   max-width: 600px;
-	padding-top: 130px;
   margin: 0px auto;
 }
 
