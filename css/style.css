@@ -3,6 +3,7 @@
 
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,700,900);
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
 
 body {
 	font-family: quicksand;  
@@ -17,7 +18,7 @@ body {
 	position: fixed;
 	top: 0;
 	box-sizing: border-box;
-	height: 45px;
+	height: 80px;
 }
 
 nav a {
@@ -35,7 +36,6 @@ nav a {
 
 nav a.active {
 	color: #1e1e1e;
-	background: white;
 }
 
 nav a:hover {
@@ -85,6 +85,11 @@ article {
   max-width: 600px;
   padding: 0px;
   margin: 0px auto;
+}
+
+h1{
+	font-family: 'Roboto Slab', serif;
+	font-size: 5em;
 }
 
 h2 {
