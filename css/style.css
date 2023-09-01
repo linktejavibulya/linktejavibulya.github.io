@@ -17,7 +17,7 @@ body {
 	position: fixed;
 	top: 0;
 	box-sizing: border-box;
-	height: 80px;
+	height: 100px;
 }
 
 nav a {
@@ -34,6 +34,8 @@ nav a {
 }
 
 nav a.active {
+	margin-top: 15px;
+	margin-bottom: 15px;
 	color: #1e1e1e;
 }
 
@@ -81,7 +83,7 @@ article {
   width: 100%;
   max-width: 1000px;
   margin: 0px auto;
-	padding-top: 100px;
+	#padding-top: 100px;
 }
 
 h1{
