@@ -30,19 +30,20 @@ nav {
     height: 100%;
 }
 
-nav a {
-	color: white;
-	text-decoration: none;
-	margin: 0px 0px;
-	padding-top: 30px;
-	padding-bottom: 30px;
-	transition: 0.3s;
-	font-family: 'Bebas Neue';
-}
-
 #main-nav.sticky {
 	position: fixed;
 	top: 0;
+}
+
+nav a {
+	color: white;
+	text-decoration: none;
+	margin: 0px 10px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	transition: 0.4s;
+	font-family: 'Roboto Slab';
+	font-size: 20px;
 }
 
 nav a.active {
