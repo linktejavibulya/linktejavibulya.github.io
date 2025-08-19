@@ -1,11 +1,359 @@
-<!DOCTYPE html>
+        .circus {
+            background: linear-gradient(rgba(231, 76, 60, 0.9), rgba(231, 76, 60, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%23e74c3c"/><path d="M500,200 L550,350 L700,350 L580,450 L630,600 L500,500 L370,600 L420,450 L300,350 L450,350 Z" fill="%23ffffff" opacity="0.1"/></svg>');
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .circus h2 {
+            color: white;
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="5; url=http://linktejavibulya.com">
-    <title>Redirecting...</title>
+    <title>Link Tejavibulya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="300" cy="700" r="120" fill="url(%23a)"/><circle cx="700" cy="800" r="80" fill="url(%23a)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.7rem 1.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        /* Parallax backgrounds */
+        .about {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%23f8f9fa"/><path d="M0,400 Q250,350 500,400 T1000,400 V1000 H0 V400 Z" fill="%23e9ecef" opacity="0.5"/></svg>');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .contact {
+            min-height: 40vh;
+            padding: 3rem 2rem 2rem 2rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        .contact h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .research {
+            background: linear-gradient(rgba(46, 204, 113, 0.9), rgba(46, 204, 113, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%232ecc71"/><polygon points="100,200 200,100 300,200 200,300" fill="%23ffffff" opacity="0.1"/><polygon points="600,400 700,300 800,400 700,500" fill="%23ffffff" opacity="0.1"/><polygon points="300,700 400,600 500,700 400,800" fill="%23ffffff" opacity="0.1"/></svg>');
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .research h2 {
+            color: white;
+        }
+
+        .publications {
+            background: linear-gradient(rgba(155, 89, 182, 0.9), rgba(155, 89, 182, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%239b59b6"/><rect x="200" y="200" width="100" height="100" fill="%23ffffff" opacity="0.1" transform="rotate(45 250 250)"/><rect x="600" y="400" width="80" height="80" fill="%23ffffff" opacity="0.1" transform="rotate(45 640 440)"/><rect x="400" y="700" width="120" height="120" fill="%23ffffff" opacity="0.1" transform="rotate(45 460 760)"/></svg>');
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .publications h2 {
+            color: white;
+        }
+
+        .circus {
+            background: linear-gradient(rgba(231, 76, 60, 0.9), rgba(231, 76, 60, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%23e74c3c"/><path d="M500,200 L550,350 L700,350 L580,450 L630,600 L500,500 L370,600 L420,450 L300,350 L450,350 Z" fill="%23ffffff" opacity="0.1"/></svg>');
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .circus h2 {
+            color: white;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.25s ease;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Tejas Vibulya</h1>
+            <nav class="nav-menu">
+                <a href="#about" class="nav-link">About Me</a>
+                <a href="#research" class="nav-link">Research</a>
+                <a href="#publications" class="nav-link">Publications</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="section-content">
+            <h2>About Me</h2>
+            <p>Welcome to my personal space on the web. I'm passionate about pushing boundaries, whether in academic research or creative pursuits. This is where I share my journey, discoveries, and the various facets of my life that make me who I am.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-content">
+            <h2>Contact</h2>
+            <p>I'd love to connect with you! Whether you're interested in collaboration, have questions about my work, or just want to say hello, don't hesitate to reach out. You can find me through various channels or drop me a message directly.</p>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="section research" id="research">
+        <div class="section-content">
+            <h2>Research</h2>
+            <p>My research focuses on exploring innovative solutions to complex problems. I'm dedicated to advancing knowledge in my field through rigorous investigation, creative thinking, and collaborative efforts with fellow researchers around the world.</p>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="section publications" id="publications">
+        <div class="section-content">
+            <h2>Publications</h2>
+            <p>Here you'll find a collection of my academic publications, articles, and written works. Each piece represents a contribution to the broader scientific community and reflects my commitment to sharing knowledge and insights.</p>
+        </div>
+    </section>
+
+    <!-- Contact Footer Section -->
+    <section class="section contact" id="contact">
+        <div class="section-content">
+            <h2>Contact</h2>
+            <p>Let's connect! Feel free to reach out for collaborations, questions, or just to say hello.</p>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            const scrollProgress = document.getElementById('scrollProgress');
+            scrollProgress.style.width = (scrollPercent * 100) + '%';
+        });
+
+        // Enhanced parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            // Apply parallax to background elements
+            const parallaxElements = document.querySelectorAll('.section');
+            parallaxElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.backgroundPosition = `center ${yPos}px`;
+            });
+        });
+
+        // Add scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for scroll animations
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Make hero section immediately visible
+        document.querySelector('.hero').style.opacity = '1';
+        document.querySelector('.hero').style.transform = 'translateY(0)';
+    </script>
 </body>
 </html>
