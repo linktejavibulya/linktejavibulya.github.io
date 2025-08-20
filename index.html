@@ -11,8 +11,11 @@
             box-sizing: border-box;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Trade+Gothic+Inline&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Graphik', 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
@@ -26,7 +29,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #808080 0%, #606060 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,6 +61,7 @@
         }
 
         .hero h1 {
+            font-family: 'Trade Gothic Inline', sans-serif;
             font-size: 4rem;
             font-weight: 300;
             color: white;
@@ -121,6 +125,7 @@
         }
 
         .section h2 {
+            font-family: 'Trade Gothic Inline', sans-serif;
             font-size: 3rem;
             margin-bottom: 2rem;
             color: #333;
@@ -133,34 +138,31 @@
             color: #666;
         }
 
-        /* Parallax backgrounds */
+        /* Parallax backgrounds - All white */
         .about {
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%23f8f9fa"/><path d="M0,400 Q250,350 500,400 T1000,400 V1000 H0 V400 Z" fill="%23e9ecef" opacity="0.5"/></svg>');
+            background: white;
             background-attachment: fixed;
             background-size: cover;
         }
 
         .research {
-            background: linear-gradient(rgba(46, 204, 113, 0.9), rgba(46, 204, 113, 0.9)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%232ecc71"/><polygon points="100,200 200,100 300,200 200,300" fill="%23ffffff" opacity="0.1"/><polygon points="600,400 700,300 800,400 700,500" fill="%23ffffff" opacity="0.1"/><polygon points="300,700 400,600 500,700 400,800" fill="%23ffffff" opacity="0.1"/></svg>');
+            background: white;
             background-attachment: fixed;
-            color: white;
+            color: #333;
         }
 
         .research h2 {
-            color: white;
+            color: #333;
         }
 
         .publications {
-            background: linear-gradient(rgba(155, 89, 182, 0.9), rgba(155, 89, 182, 0.9)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><rect width="1000" height="1000" fill="%239b59b6"/><rect x="200" y="200" width="100" height="100" fill="%23ffffff" opacity="0.1" transform="rotate(45 250 250)"/><rect x="600" y="400" width="80" height="80" fill="%23ffffff" opacity="0.1" transform="rotate(45 640 440)"/><rect x="400" y="700" width="120" height="120" fill="%23ffffff" opacity="0.1" transform="rotate(45 460 760)"/></svg>');
+            background: white;
             background-attachment: fixed;
-            color: white;
+            color: #333;
         }
 
         .publications h2 {
-            color: white;
+            color: #333;
         }
 
         /* Contact Footer Section */
@@ -172,6 +174,7 @@
         }
 
         .contact h2 {
+            font-family: 'Trade Gothic Inline', sans-serif;
             color: white;
             font-size: 2rem;
             margin-bottom: 1.5rem;
@@ -195,9 +198,45 @@
 
         .scroll-progress {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #808080, #606060);
             width: 0%;
             transition: width 0.25s ease;
+        }
+
+        /* Back to top arrow */
+        .back-to-top {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(128, 128, 128, 0.8);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: rgba(96, 96, 96, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
         }
 
         /* Mobile responsiveness */
@@ -231,6 +270,13 @@
         <div class="scroll-progress" id="scrollProgress"></div>
     </div>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+        </svg>
+    </button>
+
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
@@ -256,7 +302,9 @@
     <section class="section research" id="research">
         <div class="section-content">
             <h2>Research</h2>
-            <p>My research focuses on exploring innovative solutions to complex problems. I'm dedicated to advancing knowledge in my field through rigorous investigation, creative thinking, and collaborative efforts with fellow researchers around the world.</p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
         </div>
     </section>
 
@@ -264,7 +312,9 @@
     <section class="section publications" id="publications">
         <div class="section-content">
             <h2>Publications</h2>
-            <p>Here you'll find a collection of my academic publications, articles, and written works. Each piece represents a contribution to the broader scientific community and reflects my commitment to sharing knowledge and insights.</p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
         </div>
     </section>
 
@@ -272,7 +322,9 @@
     <section class="section contact" id="contact">
         <div class="section-content">
             <h2>Contact</h2>
-            <p>Let's connect! Feel free to reach out for collaborations, questions, or just to say hello.</p>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
         </div>
     </section>
 
@@ -284,7 +336,23 @@
             const scrollPercent = scrollTop / docHeight;
             const scrollProgress = document.getElementById('scrollProgress');
             scrollProgress.style.width = (scrollPercent * 100) + '%';
+
+            // Show/hide back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
         });
+
+        // Back to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         // Enhanced parallax effect
         window.addEventListener('scroll', () => {
