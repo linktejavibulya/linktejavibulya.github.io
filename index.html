@@ -7,9 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
-
         body {
             font-family: 'Inter', sans-serif;
             color: #1a1a2e;
@@ -25,7 +23,7 @@
         }
         .scroll-progress {
             height: 100%;
-            background: linear-gradient(90deg, #6c63ff, #a78bfa);
+            background: linear-gradient(90deg, #ef4444, #f97316, #fbbf24, #22c55e, #3b82f6, #a855f7);
             width: 0%; transition: width 0.2s ease;
         }
 
@@ -33,29 +31,23 @@
         .back-to-top {
             position: fixed; bottom: 30px; right: 30px;
             width: 48px; height: 48px;
-            background: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(108,99,255,0.2);
+            border: 1px solid rgba(0,0,0,0.08);
             border-radius: 50%; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease; z-index: 999;
             opacity: 0; transform: translateY(20px);
-            box-shadow: 0 4px 20px rgba(108,99,255,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
-        .back-to-top:hover { background: rgba(108,99,255,0.1); transform: translateY(-3px); }
-        .back-to-top svg { width: 18px; height: 18px; fill: #6c63ff; }
+        .back-to-top:hover { background: rgba(240,240,240,0.9); transform: translateY(-3px); }
+        .back-to-top svg { width: 18px; height: 18px; fill: #333; }
 
-        /* ── PIXEL ART ── */
-        .pixel-sprite {
+        /* ── Pixel Art ── */
+        .pixel-art {
             image-rendering: pixelated;
             image-rendering: crisp-edges;
-        }
-
-        /* inline SVG pixel art via canvas-like approach */
-        .pixel-art {
-            display: inline-block;
-            image-rendering: pixelated;
         }
 
         /* ── HERO ── */
@@ -67,81 +59,77 @@
             text-align: center; position: relative; overflow: hidden;
         }
 
-        /* Parallax layers */
         .parallax-layer {
             position: absolute; top: 0; left: 0;
             width: 100%; height: 100%;
             pointer-events: none;
         }
 
-        /* Floating glass orbs */
+        /* Glass orbs */
         .orb {
             position: absolute; border-radius: 50%;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .orb-1 {
-            width: 300px; height: 300px;
-            top: 10%; left: -8%;
-            background: radial-gradient(circle at 30% 30%, rgba(108,99,255,0.12), rgba(167,139,250,0.04));
-            box-shadow: inset 0 0 60px rgba(108,99,255,0.08), 0 20px 60px rgba(108,99,255,0.06);
+            width: 280px; height: 280px;
+            top: 8%; left: -5%;
+            background: radial-gradient(circle at 30% 30%, rgba(239,68,68,0.06), rgba(251,191,36,0.03));
+            box-shadow: inset 0 0 60px rgba(239,68,68,0.04), 0 20px 60px rgba(239,68,68,0.04);
         }
         .orb-2 {
             width: 200px; height: 200px;
-            top: 60%; right: 5%;
-            background: radial-gradient(circle at 30% 30%, rgba(167,139,250,0.15), rgba(108,99,255,0.04));
-            box-shadow: inset 0 0 40px rgba(167,139,250,0.1), 0 15px 40px rgba(167,139,250,0.08);
+            top: 55%; right: 3%;
+            background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.07), rgba(168,85,247,0.03));
+            box-shadow: inset 0 0 40px rgba(59,130,246,0.05), 0 15px 40px rgba(59,130,246,0.05);
         }
         .orb-3 {
-            width: 150px; height: 150px;
-            top: 20%; right: 20%;
-            background: radial-gradient(circle at 30% 30%, rgba(196,181,253,0.18), rgba(108,99,255,0.03));
-            box-shadow: inset 0 0 30px rgba(196,181,253,0.1), 0 10px 30px rgba(196,181,253,0.07);
+            width: 160px; height: 160px;
+            top: 15%; right: 18%;
+            background: radial-gradient(circle at 30% 30%, rgba(34,197,94,0.06), rgba(59,130,246,0.02));
+            box-shadow: inset 0 0 30px rgba(34,197,94,0.04), 0 10px 30px rgba(34,197,94,0.04);
         }
 
-        /* Pixel deco elements in hero */
+        /* Pixel sprite positions in hero */
         .hero-pixel-left {
-            position: absolute; left: 5%; bottom: 20%;
+            position: absolute; left: 4%; bottom: 18%;
             animation: pixelFloat 4s ease-in-out infinite;
         }
-        .hero-pixel-right {
-            position: absolute; right: 8%; top: 25%;
-            animation: pixelFloat 5s ease-in-out infinite 1s;
-        }
-        .hero-pixel-top {
-            position: absolute; left: 35%; top: 8%;
+        .hero-pixel-center {
+            position: absolute; left: 50%; top: 6%;
+            transform: translateX(-50%);
             animation: pixelFloat 6s ease-in-out infinite 0.5s;
+        }
+        .hero-pixel-right {
+            position: absolute; right: 6%; top: 22%;
+            animation: pixelFloat 5s ease-in-out infinite 1s;
         }
 
         @keyframes pixelFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-pixel-center { animation: pixelFloatCenter 6s ease-in-out infinite 0.5s; }
+        @keyframes pixelFloatCenter {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
         }
 
         .hero-content {
             z-index: 2; position: relative;
             animation: fadeInUp 0.9s ease-out;
         }
-
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2.8rem, 6vw, 5.5rem);
-            font-weight: 700;
-            color: #1a1a2e;
-            letter-spacing: -0.03em;
-            margin-bottom: 0.3em;
-            line-height: 1.1;
+            font-weight: 700; color: #1a1a2e;
+            letter-spacing: -0.03em; margin-bottom: 0.3em; line-height: 1.1;
         }
-
         .hero-subtitle {
-            font-size: 1rem;
-            color: #888;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 3rem;
-            font-weight: 400;
+            font-size: 0.95rem; color: #888;
+            letter-spacing: 0.18em; text-transform: uppercase;
+            margin-bottom: 3rem; font-weight: 400;
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(28px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -153,206 +141,133 @@
             justify-content: center;
             animation: fadeInUp 0.9s ease-out 0.25s both;
         }
-
         .nav-link {
-            color: #1a1a2e;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            border: 1px solid rgba(108,99,255,0.2);
-            background: rgba(255,255,255,0.6);
+            color: #1a1a2e; text-decoration: none;
+            font-size: 0.85rem; font-weight: 500;
+            letter-spacing: 0.04em; padding: 0.6rem 1.4rem;
+            border-radius: 50px; border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.7);
             backdrop-filter: blur(10px);
             transition: all 0.25s ease;
-            box-shadow: 0 2px 12px rgba(108,99,255,0.06);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
         .nav-link:hover {
-            background: rgba(108,99,255,0.08);
-            border-color: rgba(108,99,255,0.4);
+            background: rgba(245,245,245,0.9);
+            border-color: rgba(0,0,0,0.2);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(108,99,255,0.12);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         }
 
         /* ── SECTIONS ── */
         .section {
-            min-height: 100vh;
-            padding: 7rem 2rem;
+            min-height: 100vh; padding: 7rem 2rem;
             display: flex; align-items: center; justify-content: center;
             position: relative; overflow: hidden;
         }
+        .section-content { max-width: 860px; width: 100%; position: relative; z-index: 2; }
 
-        .section-content {
-            max-width: 860px; width: 100%;
-            position: relative; z-index: 2;
-        }
-
-        /* Section label */
         .section-label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #6c63ff;
-            margin-bottom: 1rem;
+            font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: #888; margin-bottom: 1rem;
         }
-
         .section h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+            color: #1a1a2e; margin-bottom: 1.5rem;
+            letter-spacing: -0.02em; line-height: 1.15;
         }
+        .section p { font-size: 1.05rem; line-height: 1.8; color: #555; max-width: 680px; }
 
-        .section p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #555;
-            max-width: 680px;
+        /* Rainbow divider */
+        .section-divider {
+            width: 56px; height: 3px;
+            background: linear-gradient(90deg, #ef4444, #f97316, #fbbf24, #22c55e, #3b82f6, #a855f7);
+            border-radius: 2px; margin-bottom: 2rem;
         }
 
         /* Glass card */
         .glass-card {
-            background: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.6);
             backdrop-filter: blur(18px);
-            border: 1px solid rgba(108,99,255,0.1);
-            border-radius: 24px;
-            padding: 3rem 3.5rem;
-            box-shadow: 0 8px 40px rgba(108,99,255,0.07),
-                        0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 24px; padding: 3rem 3.5rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.02);
             position: relative;
         }
+        .card-pixel { position: absolute; top: -18px; right: 32px; }
 
-        /* Decorative pixel in corner of card */
-        .card-pixel {
-            position: absolute;
-            top: -16px; right: 32px;
-        }
+        /* Section backgrounds */
+        .about       { background: #fafafa; }
+        .research    { background: #ffffff; }
+        .publications{ background: #fafafa; }
+        .contact     { min-height: 50vh; padding: 5rem 2rem; background: #ffffff; border-top: 1px solid rgba(0,0,0,0.05); }
 
-        /* ── ABOUT ── */
-        .about {
-            background: #fafafa;
+        /* Soft bg orbs per section */
+        .section-bg-orb {
+            position: absolute; border-radius: 50%; pointer-events: none;
         }
-        .about-bg-orb {
-            position: absolute; border-radius: 50%;
-            width: 500px; height: 500px;
-            top: -100px; right: -150px;
-            background: radial-gradient(circle, rgba(108,99,255,0.05) 0%, transparent 70%);
-            pointer-events: none;
+        .orb-about {
+            width: 480px; height: 480px; top: -80px; right: -140px;
+            background: radial-gradient(circle, rgba(239,68,68,0.04) 0%, transparent 70%);
         }
-
-        /* ── RESEARCH ── */
-        .research {
-            background: #ffffff;
+        .orb-research {
+            width: 420px; height: 420px; bottom: -60px; left: -110px;
+            background: radial-gradient(circle, rgba(34,197,94,0.04) 0%, transparent 70%);
         }
-        .research-bg-orb {
-            position: absolute; border-radius: 50%;
-            width: 400px; height: 400px;
-            bottom: -80px; left: -120px;
-            background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
-            pointer-events: none;
+        .orb-pubs {
+            width: 440px; height: 440px; top: 50%; right: -100px; transform: translateY(-50%);
+            background: radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%);
         }
 
-        /* ── PUBLICATIONS ── */
-        .publications {
-            background: #fafafa;
-        }
-        .publications-bg-orb {
-            position: absolute; border-radius: 50%;
-            width: 450px; height: 450px;
-            top: 50%; right: -100px;
-            transform: translateY(-50%);
-            background: radial-gradient(circle, rgba(196,181,253,0.07) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        /* Section pixel accent */
+        /* Section pixel accents */
         .section-pixel-right {
-            position: absolute; right: 6%; top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.5;
-            pointer-events: none;
+            position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+            opacity: 0.75; pointer-events: none;
         }
         .section-pixel-left {
-            position: absolute; left: 4%; top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.5;
-            pointer-events: none;
+            position: absolute; left: 4%; top: 50%; transform: translateY(-50%);
+            opacity: 0.75; pointer-events: none;
         }
 
-        /* ── CONTACT ── */
-        .contact {
-            min-height: 50vh;
-            padding: 5rem 2rem;
-            background: #ffffff;
-            border-top: 1px solid rgba(108,99,255,0.08);
-        }
-
+        /* Contact */
         .contact h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
+            font-size: 1.8rem; font-weight: 700;
+            color: #1a1a2e; margin-bottom: 0.5rem; letter-spacing: -0.02em;
         }
-
-        .contact p {
-            font-size: 0.95rem;
-            color: #888;
-            margin-bottom: 2rem;
-        }
+        .contact > .section-content > p { font-size: 0.95rem; color: #888; margin-bottom: 2rem; }
 
         .contact-icons {
-            display: flex; justify-content: center;
-            gap: 1.2rem; margin-top: 1.5rem;
+            display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.5rem;
         }
-
         .contact-icon {
             width: 46px; height: 46px;
             display: flex; align-items: center; justify-content: center;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(108,99,255,0.15);
-            border-radius: 14px;
-            transition: all 0.25s ease;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 14px; transition: all 0.25s ease;
             text-decoration: none; color: #333;
-            box-shadow: 0 2px 10px rgba(108,99,255,0.06);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.04);
         }
         .contact-icon:hover {
-            background: rgba(108,99,255,0.07);
-            border-color: rgba(108,99,255,0.35);
+            background: rgba(245,245,245,0.95);
+            border-color: rgba(0,0,0,0.15);
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(108,99,255,0.12);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
-        .contact-icon svg { width: 20px; height: 20px; fill: #6c63ff; }
+        .contact-icon svg { width: 20px; height: 20px; fill: #333; }
 
-        /* ── Reveal animation ── */
-        .reveal {
-            opacity: 0; transform: translateY(36px);
-            transition: opacity 0.75s ease, transform 0.75s ease;
-        }
+        /* Reveal */
+        .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ── Divider line ── */
-        .section-divider {
-            width: 48px; height: 3px;
-            background: linear-gradient(90deg, #6c63ff, #a78bfa);
-            border-radius: 2px;
-            margin-bottom: 2rem;
-        }
-
-        /* Mobile */
         @media (max-width: 768px) {
             .glass-card { padding: 2rem 1.5rem; }
             .section-pixel-right, .section-pixel-left { display: none; }
-            .orb-1 { width: 180px; height: 180px; }
-            .orb-2 { display: none; }
-            .orb-3 { display: none; }
+            .orb-1 { width: 160px; height: 160px; }
+            .orb-2, .orb-3 { display: none; }
+            .hero-pixel-left, .hero-pixel-right { display: none; }
         }
     </style>
 </head>
@@ -368,76 +283,138 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
 </button>
 
-<!-- ══ HERO ══ -->
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
 <section class="hero" id="home">
 
-    <!-- Glass orbs (parallax layer 1 — slow) -->
-    <div class="parallax-layer" data-speed="0.15">
+    <!-- Glass orbs layer (parallax slow) -->
+    <div class="parallax-layer" data-speed="0.12">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
     </div>
 
-    <!-- Pixel characters (parallax layer 2 — medium) -->
-    <div class="parallax-layer" data-speed="0.3">
-        <!-- Pixel rocket (left) -->
+    <!-- Pixel art layer (parallax medium) -->
+    <div class="parallax-layer" data-speed="0.28">
+
+        <!-- 🎪 CIRCUS TENT — left -->
         <div class="hero-pixel-left">
-            <svg width="48" height="64" viewBox="0 0 12 16" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                <rect x="5" y="0" width="2" height="2" fill="#6c63ff"/>
-                <rect x="4" y="2" width="4" height="2" fill="#6c63ff"/>
-                <rect x="3" y="4" width="6" height="4" fill="#a78bfa"/>
-                <rect x="4" y="4" width="4" height="4" fill="#6c63ff"/>
-                <rect x="5" y="5" width="2" height="2" fill="#c4b5fd"/>
-                <rect x="3" y="8" width="6" height="2" fill="#6c63ff"/>
-                <rect x="2" y="9" width="2" height="2" fill="#fbbf24"/>
-                <rect x="8" y="9" width="2" height="2" fill="#fbbf24"/>
-                <rect x="4" y="10" width="4" height="2" fill="#7c3aed"/>
-                <rect x="3" y="12" width="2" height="2" fill="#f97316"/>
-                <rect x="7" y="12" width="2" height="2" fill="#f97316"/>
-                <rect x="4" y="12" width="4" height="1" fill="#fbbf24"/>
-                <rect x="5" y="13" width="2" height="2" fill="#f97316"/>
+            <svg width="80" height="80" viewBox="0 0 16 16" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                <!-- Flag -->
+                <rect x="7" y="0" width="2" height="1" fill="#ef4444"/>
+                <rect x="7" y="1" width="1" height="2" fill="#6b7280"/>
+                <!-- Rainbow roof stripes (triangle) -->
+                <rect x="6" y="2" width="3" height="1" fill="#ef4444"/>
+                <rect x="5" y="3" width="5" height="1" fill="#f97316"/>
+                <rect x="4" y="4" width="7" height="1" fill="#fbbf24"/>
+                <rect x="3" y="5" width="9" height="1" fill="#22c55e"/>
+                <rect x="2" y="6" width="11" height="1" fill="#3b82f6"/>
+                <rect x="1" y="7" width="13" height="1" fill="#a855f7"/>
+                <!-- Eave strip — alternating rainbow pennants -->
+                <rect x="0" y="8" width="2" height="1" fill="#ef4444"/>
+                <rect x="2" y="8" width="2" height="1" fill="#f97316"/>
+                <rect x="4" y="8" width="2" height="1" fill="#fbbf24"/>
+                <rect x="6" y="8" width="2" height="1" fill="#22c55e"/>
+                <rect x="8" y="8" width="2" height="1" fill="#3b82f6"/>
+                <rect x="10" y="8" width="2" height="1" fill="#a855f7"/>
+                <rect x="12" y="8" width="2" height="1" fill="#ec4899"/>
+                <!-- Tent walls -->
+                <rect x="0" y="9" width="16" height="5" fill="#fffbeb"/>
+                <rect x="0" y="10" width="16" height="1" fill="#fef3c7"/>
+                <rect x="0" y="12" width="16" height="1" fill="#fef3c7"/>
+                <!-- Door arch -->
+                <rect x="6" y="9" width="4" height="5" fill="#1a1a2e"/>
+                <rect x="7" y="9" width="2" height="5" fill="#1e1b4b"/>
+                <!-- Side poles -->
+                <rect x="0" y="9" width="1" height="5" fill="#ef4444"/>
+                <rect x="15" y="9" width="1" height="5" fill="#ef4444"/>
+                <!-- Ground line -->
+                <rect x="0" y="14" width="16" height="1" fill="#92400e"/>
+                <!-- Small star on tent -->
+                <rect x="2" y="10" width="1" height="1" fill="#fbbf24"/>
+                <rect x="12" y="10" width="1" height="1" fill="#fbbf24"/>
             </svg>
         </div>
 
-        <!-- Pixel star cluster (top) -->
-        <div class="hero-pixel-top">
-            <svg width="64" height="48" viewBox="0 0 16 12" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0" y="2" width="2" height="2" fill="#6c63ff" opacity="0.7"/>
-                <rect x="1" y="1" width="2" height="1" fill="#6c63ff" opacity="0.7"/>
-                <rect x="1" y="3" width="2" height="1" fill="#6c63ff" opacity="0.7"/>
-                <rect x="7" y="0" width="2" height="2" fill="#a78bfa" opacity="0.8"/>
-                <rect x="6" y="1" width="1" height="2" fill="#a78bfa" opacity="0.8"/>
-                <rect x="9" y="1" width="1" height="2" fill="#a78bfa" opacity="0.8"/>
-                <rect x="13" y="4" width="2" height="2" fill="#c4b5fd" opacity="0.6"/>
-                <rect x="12" y="5" width="1" height="2" fill="#c4b5fd" opacity="0.6"/>
-                <rect x="14" y="5" width="1" height="2" fill="#c4b5fd" opacity="0.6"/>
-                <rect x="3" y="7" width="1" height="1" fill="#6c63ff" opacity="0.4"/>
-                <rect x="10" y="9" width="1" height="1" fill="#a78bfa" opacity="0.4"/>
+        <!-- 🧠 BRAIN — top center -->
+        <div class="hero-pixel-center">
+            <svg width="80" height="64" viewBox="0 0 16 12" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                <!-- Left hemisphere — warm (red/orange/yellow) -->
+                <rect x="1" y="1" width="5" height="1" fill="#f97316"/>
+                <rect x="0" y="2" width="7" height="1" fill="#fbbf24"/>
+                <rect x="0" y="3" width="7" height="1" fill="#f97316"/>
+                <rect x="0" y="4" width="7" height="1" fill="#ef4444"/>
+                <rect x="0" y="5" width="7" height="1" fill="#f97316"/>
+                <rect x="0" y="6" width="6" height="1" fill="#fbbf24"/>
+                <rect x="1" y="7" width="5" height="1" fill="#ef4444"/>
+                <rect x="2" y="8" width="4" height="1" fill="#f97316"/>
+                <!-- Right hemisphere — cool (green/blue/purple) -->
+                <rect x="10" y="1" width="5" height="1" fill="#22c55e"/>
+                <rect x="9" y="2" width="7" height="1" fill="#14b8a6"/>
+                <rect x="9" y="3" width="7" height="1" fill="#3b82f6"/>
+                <rect x="9" y="4" width="7" height="1" fill="#6366f1"/>
+                <rect x="9" y="5" width="7" height="1" fill="#a855f7"/>
+                <rect x="10" y="6" width="6" height="1" fill="#3b82f6"/>
+                <rect x="10" y="7" width="5" height="1" fill="#6366f1"/>
+                <rect x="10" y="8" width="4" height="1" fill="#a855f7"/>
+                <!-- Center fold / interhemispheric fissure -->
+                <rect x="7" y="0" width="2" height="9" fill="#e5e7eb"/>
+                <rect x="8" y="0" width="1" height="9" fill="#d1d5db"/>
+                <!-- Gyri texture lines (left) -->
+                <rect x="2" y="3" width="1" height="2" fill="#fbbf24"/>
+                <rect x="4" y="2" width="1" height="3" fill="#ef4444"/>
+                <rect x="1" y="5" width="1" height="2" fill="#fbbf24"/>
+                <!-- Gyri texture lines (right) -->
+                <rect x="11" y="3" width="1" height="2" fill="#14b8a6"/>
+                <rect x="13" y="2" width="1" height="3" fill="#a855f7"/>
+                <rect x="14" y="5" width="1" height="2" fill="#3b82f6"/>
+                <!-- Brain stem -->
+                <rect x="6" y="9" width="4" height="2" fill="#9ca3af"/>
+                <rect x="7" y="11" width="2" height="1" fill="#6b7280"/>
+                <!-- Little sparkle dots above brain -->
+                <rect x="3" y="0" width="1" height="1" fill="#fbbf24"/>
+                <rect x="12" y="0" width="1" height="1" fill="#a855f7"/>
             </svg>
         </div>
 
-        <!-- Pixel computer (right) -->
+        <!-- 💻 COMPUTER — right -->
         <div class="hero-pixel-right">
-            <svg width="56" height="56" viewBox="0 0 14 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <svg width="72" height="72" viewBox="0 0 14 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                <!-- Monitor bezel -->
                 <rect x="1" y="0" width="12" height="9" fill="#1a1a2e"/>
-                <rect x="2" y="1" width="10" height="7" fill="#6c63ff"/>
-                <rect x="3" y="2" width="8" height="5" fill="#c4b5fd"/>
-                <rect x="4" y="3" width="6" height="3" fill="#ede9fe"/>
-                <!-- screen glare -->
-                <rect x="4" y="3" width="2" height="1" fill="#ffffff" opacity="0.6"/>
-                <!-- stand -->
-                <rect x="5" y="9" width="4" height="1" fill="#888"/>
-                <rect x="4" y="10" width="6" height="1" fill="#888"/>
-                <rect x="3" y="11" width="8" height="1" fill="#555"/>
-                <!-- keyboard dots -->
-                <rect x="2" y="13" width="1" height="1" fill="#ddd"/>
-                <rect x="4" y="13" width="1" height="1" fill="#ddd"/>
-                <rect x="6" y="13" width="1" height="1" fill="#ddd"/>
-                <rect x="8" y="13" width="1" height="1" fill="#ddd"/>
-                <rect x="10" y="13" width="1" height="1" fill="#ddd"/>
+                <!-- Screen — rainbow scanlines -->
+                <rect x="2" y="1" width="10" height="1" fill="#ef4444"/>
+                <rect x="2" y="2" width="10" height="1" fill="#f97316"/>
+                <rect x="2" y="3" width="10" height="1" fill="#fbbf24"/>
+                <rect x="2" y="4" width="10" height="1" fill="#22c55e"/>
+                <rect x="2" y="5" width="10" height="1" fill="#14b8a6"/>
+                <rect x="2" y="6" width="10" height="1" fill="#3b82f6"/>
+                <rect x="2" y="7" width="10" height="1" fill="#a855f7"/>
+                <!-- Screen glare -->
+                <rect x="3" y="1" width="2" height="1" fill="#ffffff" opacity="0.45"/>
+                <rect x="3" y="2" width="1" height="1" fill="#ffffff" opacity="0.25"/>
+                <!-- Cursor blink -->
+                <rect x="8" y="4" width="2" height="1" fill="#ffffff" opacity="0.6"/>
+                <!-- Stand -->
+                <rect x="5" y="9" width="4" height="1" fill="#4b5563"/>
+                <rect x="4" y="10" width="6" height="1" fill="#4b5563"/>
+                <rect x="3" y="11" width="8" height="1" fill="#374151"/>
+                <!-- Keyboard — rainbow keys -->
+                <rect x="2" y="13" width="1" height="1" fill="#ef4444"/>
+                <rect x="4" y="13" width="1" height="1" fill="#f97316"/>
+                <rect x="6" y="13" width="1" height="1" fill="#22c55e"/>
+                <rect x="8" y="13" width="1" height="1" fill="#3b82f6"/>
+                <rect x="10" y="13" width="1" height="1" fill="#a855f7"/>
+                <rect x="3" y="13" width="1" height="1" fill="#fbbf24"/>
+                <rect x="5" y="13" width="1" height="1" fill="#14b8a6"/>
+                <rect x="7" y="13" width="1" height="1" fill="#6366f1"/>
+                <rect x="9" y="13" width="1" height="1" fill="#ec4899"/>
             </svg>
         </div>
-    </div>
+
+    </div><!-- end parallax layer -->
 
     <div class="hero-content">
         <h1>Link Tejavibulya</h1>
@@ -451,31 +428,81 @@
     </div>
 </section>
 
-<!-- ══ ABOUT ══ -->
-<section class="section about" id="about">
-    <div class="about-bg-orb"></div>
 
-    <!-- Pixel character accent -->
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section class="section about" id="about">
+    <div class="section-bg-orb orb-about"></div>
+
+    <!-- 🎭 CIRCUS ARTS / JUGGLER — right accent -->
     <div class="section-pixel-right">
-        <svg width="60" height="80" viewBox="0 0 15 20" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-            <!-- Simple pixel person reading -->
-            <rect x="5" y="0" width="5" height="5" fill="#fbbf24"/>
-            <rect x="4" y="1" width="1" height="3" fill="#fbbf24"/>
-            <rect x="10" y="1" width="1" height="3" fill="#fbbf24"/>
-            <rect x="6" y="2" width="1" height="1" fill="#1a1a2e"/>
-            <rect x="8" y="2" width="1" height="1" fill="#1a1a2e"/>
-            <rect x="6" y="4" width="3" height="1" fill="#1a1a2e"/>
-            <rect x="4" y="5" width="7" height="6" fill="#6c63ff"/>
-            <rect x="5" y="5" width="5" height="6" fill="#a78bfa"/>
-            <rect x="3" y="6" width="2" height="4" fill="#6c63ff"/>
-            <rect x="10" y="6" width="2" height="4" fill="#6c63ff"/>
-            <!-- book in hands -->
-            <rect x="8" y="8" width="4" height="3" fill="#fbbf24"/>
-            <rect x="9" y="9" width="2" height="1" fill="#f97316"/>
-            <rect x="4" y="11" width="7" height="7" fill="#6c63ff"/>
-            <rect x="5" y="11" width="5" height="7" fill="#7c3aed"/>
-            <rect x="4" y="18" width="3" height="2" fill="#1a1a2e"/>
-            <rect x="8" y="18" width="3" height="2" fill="#1a1a2e"/>
+        <svg width="60" height="88" viewBox="0 0 12 18" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Juggling balls in arc -->
+            <rect x="0" y="0" width="2" height="2" fill="#ef4444"/>
+            <rect x="5" y="0" width="2" height="2" fill="#22c55e"/>
+            <rect x="10" y="1" width="2" height="2" fill="#3b82f6"/>
+            <!-- Arms up -->
+            <rect x="2" y="2" width="1" height="2" fill="#fbbf24"/>
+            <rect x="9" y="3" width="1" height="2" fill="#fbbf24"/>
+            <!-- Silly hat -->
+            <rect x="4" y="2" width="4" height="1" fill="#a855f7"/>
+            <rect x="5" y="1" width="2" height="1" fill="#a855f7"/>
+            <rect x="6" y="0" width="1" height="1" fill="#fbbf24"/>
+            <!-- Head -->
+            <rect x="4" y="3" width="4" height="3" fill="#fbbf24"/>
+            <rect x="5" y="4" width="1" height="1" fill="#1a1a2e"/>
+            <rect x="7" y="4" width="1" height="1" fill="#1a1a2e"/>
+            <rect x="5" y="5" width="2" height="1" fill="#ef4444"/>
+            <!-- Colorful costume body -->
+            <rect x="3" y="6" width="6" height="5" fill="#ec4899"/>
+            <rect x="4" y="6" width="4" height="5" fill="#f97316"/>
+            <!-- Star on chest -->
+            <rect x="5" y="7" width="2" height="1" fill="#fbbf24"/>
+            <rect x="4" y="8" width="4" height="1" fill="#fbbf24"/>
+            <rect x="5" y="9" width="2" height="1" fill="#fbbf24"/>
+            <!-- Legs -->
+            <rect x="4" y="11" width="2" height="4" fill="#3b82f6"/>
+            <rect x="7" y="11" width="2" height="4" fill="#3b82f6"/>
+            <!-- Big shoes -->
+            <rect x="3" y="15" width="3" height="2" fill="#ef4444"/>
+            <rect x="7" y="15" width="3" height="2" fill="#ef4444"/>
+            <!-- Polka dots on costume -->
+            <rect x="3" y="7" width="1" height="1" fill="#a855f7"/>
+            <rect x="9" y="8" width="1" height="1" fill="#22c55e"/>
+        </svg>
+    </div>
+
+    <!-- 🏃 BEHAVIOR figure — left accent -->
+    <div class="section-pixel-left">
+        <svg width="52" height="76" viewBox="0 0 13 19" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <rect x="4" y="0" width="4" height="4" fill="#fbbf24"/>
+            <rect x="5" y="1" width="1" height="1" fill="#1a1a2e"/>
+            <rect x="7" y="1" width="1" height="1" fill="#1a1a2e"/>
+            <rect x="5" y="3" width="3" height="1" fill="#ef4444"/>
+            <!-- Hair -->
+            <rect x="4" y="0" width="5" height="1" fill="#92400e"/>
+            <rect x="3" y="1" width="1" height="1" fill="#92400e"/>
+            <!-- Left arm raised — excited/curious -->
+            <rect x="1" y="3" width="3" height="1" fill="#fbbf24"/>
+            <rect x="0" y="2" width="2" height="2" fill="#fbbf24"/>
+            <!-- Right arm pointing forward -->
+            <rect x="9" y="5" width="3" height="1" fill="#fbbf24"/>
+            <rect x="11" y="6" width="2" height="2" fill="#fbbf24"/>
+            <!-- Rainbow shirt body -->
+            <rect x="3" y="4" width="6" height="4" fill="#ec4899"/>
+            <rect x="4" y="5" width="4" height="2" fill="#a855f7"/>
+            <!-- Belt -->
+            <rect x="3" y="8" width="6" height="1" fill="#fbbf24"/>
+            <!-- Pants -->
+            <rect x="3" y="9" width="6" height="4" fill="#3b82f6"/>
+            <!-- Running/stepping legs -->
+            <rect x="3" y="13" width="3" height="4" fill="#1d4ed8"/>
+            <rect x="7" y="12" width="3" height="4" fill="#1d4ed8"/>
+            <!-- Shoes -->
+            <rect x="2" y="16" width="4" height="2" fill="#22c55e"/>
+            <rect x="7" y="15" width="4" height="2" fill="#ef4444"/>
         </svg>
     </div>
 
@@ -483,13 +510,18 @@
         <p class="section-label">01 — Who I Am</p>
         <div class="section-divider"></div>
         <div class="glass-card">
-            <!-- tiny pixel bookmark -->
             <div class="card-pixel">
-                <svg width="20" height="28" viewBox="0 0 5 7" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="5" height="7" fill="#6c63ff"/>
-                    <rect x="0" y="5" width="2" height="2" fill="#ffffff"/>
-                    <rect x="2" y="6" width="1" height="1" fill="#6c63ff"/>
-                    <rect x="3" y="5" width="2" height="2" fill="#ffffff"/>
+                <!-- tiny pixel star -->
+                <svg width="20" height="20" viewBox="0 0 5 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="0" width="1" height="1" fill="#fbbf24"/>
+                    <rect x="0" y="2" width="1" height="1" fill="#ef4444"/>
+                    <rect x="4" y="2" width="1" height="1" fill="#3b82f6"/>
+                    <rect x="1" y="1" width="1" height="1" fill="#f97316"/>
+                    <rect x="3" y="1" width="1" height="1" fill="#22c55e"/>
+                    <rect x="2" y="2" width="1" height="1" fill="#a855f7"/>
+                    <rect x="1" y="3" width="1" height="1" fill="#ec4899"/>
+                    <rect x="3" y="3" width="1" height="1" fill="#14b8a6"/>
+                    <rect x="2" y="4" width="1" height="1" fill="#fbbf24"/>
                 </svg>
             </div>
             <h2>About Me</h2>
@@ -498,29 +530,109 @@
     </div>
 </section>
 
-<!-- ══ RESEARCH ══ -->
-<section class="section research" id="research">
-    <div class="research-bg-orb"></div>
 
+<!-- ══════════════════════════════════════
+     RESEARCH
+══════════════════════════════════════ -->
+<section class="section research" id="research">
+    <div class="section-bg-orb orb-research"></div>
+
+    <!-- 🕸 CONNECTIVITY network — right accent -->
+    <div class="section-pixel-right">
+        <svg width="60" height="48" viewBox="0 0 15 12" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hub node -->
+            <rect x="6" y="5" width="3" height="2" fill="#fbbf24"/>
+            <!-- Outer nodes -->
+            <rect x="0" y="0" width="2" height="2" fill="#ef4444"/>
+            <rect x="13" y="0" width="2" height="2" fill="#22c55e"/>
+            <rect x="0" y="9" width="2" height="2" fill="#3b82f6"/>
+            <rect x="13" y="9" width="2" height="2" fill="#a855f7"/>
+            <rect x="6" y="0" width="2" height="2" fill="#f97316"/>
+            <rect x="6" y="10" width="2" height="2" fill="#ec4899"/>
+            <!-- Connection lines to hub (dot trail) -->
+            <!-- top-left to hub -->
+            <rect x="2" y="1" width="1" height="1" fill="#ef4444" opacity="0.6"/>
+            <rect x="3" y="2" width="1" height="1" fill="#f97316" opacity="0.5"/>
+            <rect x="4" y="3" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <rect x="5" y="4" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+            <!-- top-center to hub -->
+            <rect x="7" y="2" width="1" height="1" fill="#f97316" opacity="0.5"/>
+            <rect x="7" y="3" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <rect x="7" y="4" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+            <!-- top-right to hub -->
+            <rect x="10" y="2" width="1" height="1" fill="#22c55e" opacity="0.5"/>
+            <rect x="11" y="3" width="1" height="1" fill="#14b8a6" opacity="0.5"/>
+            <rect x="9" y="4" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <!-- bot-left to hub -->
+            <rect x="2" y="9" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+            <rect x="3" y="8" width="1" height="1" fill="#6366f1" opacity="0.5"/>
+            <rect x="4" y="7" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <rect x="5" y="6" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+            <!-- bot-center to hub -->
+            <rect x="7" y="9" width="1" height="1" fill="#ec4899" opacity="0.5"/>
+            <rect x="7" y="8" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <rect x="7" y="7" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <!-- bot-right to hub -->
+            <rect x="12" y="9" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <rect x="11" y="8" width="1" height="1" fill="#6366f1" opacity="0.5"/>
+            <rect x="10" y="7" width="1" height="1" fill="#fbbf24" opacity="0.55"/>
+            <rect x="9" y="6" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <!-- 🧠⚡ NEURAL NET — left accent -->
     <div class="section-pixel-left">
-        <svg width="56" height="56" viewBox="0 0 14 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-            <!-- Pixel magnifier -->
-            <rect x="3" y="0" width="6" height="1" fill="#6c63ff"/>
-            <rect x="1" y="1" width="2" height="1" fill="#6c63ff"/>
-            <rect x="9" y="1" width="2" height="1" fill="#6c63ff"/>
-            <rect x="0" y="2" width="1" height="5" fill="#6c63ff"/>
-            <rect x="11" y="2" width="1" height="5" fill="#6c63ff"/>
-            <rect x="1" y="2" width="2" height="5" fill="#c4b5fd"/>
-            <rect x="9" y="2" width="2" height="5" fill="#c4b5fd"/>
-            <rect x="3" y="2" width="6" height="5" fill="#ede9fe"/>
-            <rect x="4" y="3" width="4" height="3" fill="#ffffff"/>
-            <rect x="1" y="7" width="2" height="1" fill="#6c63ff"/>
-            <rect x="9" y="7" width="2" height="1" fill="#6c63ff"/>
-            <rect x="3" y="8" width="6" height="1" fill="#6c63ff"/>
-            <rect x="8" y="9" width="2" height="1" fill="#6c63ff"/>
-            <rect x="9" y="10" width="2" height="1" fill="#6c63ff"/>
-            <rect x="10" y="11" width="2" height="1" fill="#6c63ff"/>
-            <rect x="11" y="12" width="2" height="2" fill="#6c63ff"/>
+        <svg width="64" height="64" viewBox="0 0 16 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Input nodes (3) -->
+            <rect x="0" y="1" width="2" height="2" fill="#ef4444"/>
+            <rect x="0" y="6" width="2" height="2" fill="#f97316"/>
+            <rect x="0" y="11" width="2" height="2" fill="#fbbf24"/>
+            <!-- Hidden nodes (4) -->
+            <rect x="7" y="0" width="2" height="2" fill="#22c55e"/>
+            <rect x="7" y="4" width="2" height="2" fill="#14b8a6"/>
+            <rect x="7" y="8" width="2" height="2" fill="#3b82f6"/>
+            <rect x="7" y="12" width="2" height="2" fill="#6366f1"/>
+            <!-- Output nodes (2) -->
+            <rect x="14" y="3" width="2" height="2" fill="#a855f7"/>
+            <rect x="14" y="9" width="2" height="2" fill="#ec4899"/>
+            <!-- Input→Hidden connections (dot trails) -->
+            <!-- in-1 → h-1 -->
+            <rect x="2" y="1" width="1" height="1" fill="#ef4444" opacity="0.6"/>
+            <rect x="3" y="1" width="1" height="1" fill="#22c55e" opacity="0.5"/>
+            <rect x="4" y="0" width="1" height="1" fill="#22c55e" opacity="0.55"/>
+            <rect x="5" y="0" width="1" height="1" fill="#22c55e" opacity="0.6"/>
+            <!-- in-1 → h-2 -->
+            <rect x="3" y="2" width="1" height="1" fill="#ef4444" opacity="0.4"/>
+            <rect x="5" y="3" width="1" height="1" fill="#14b8a6" opacity="0.45"/>
+            <!-- in-2 → h-2 -->
+            <rect x="2" y="6" width="1" height="1" fill="#f97316" opacity="0.6"/>
+            <rect x="4" y="5" width="1" height="1" fill="#14b8a6" opacity="0.5"/>
+            <rect x="6" y="5" width="1" height="1" fill="#14b8a6" opacity="0.55"/>
+            <!-- in-2 → h-3 -->
+            <rect x="3" y="7" width="1" height="1" fill="#f97316" opacity="0.4"/>
+            <rect x="5" y="7" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
+            <!-- in-3 → h-3 -->
+            <rect x="2" y="10" width="1" height="1" fill="#fbbf24" opacity="0.5"/>
+            <rect x="4" y="9" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+            <rect x="6" y="9" width="1" height="1" fill="#3b82f6" opacity="0.55"/>
+            <!-- in-3 → h-4 -->
+            <rect x="3" y="11" width="1" height="1" fill="#fbbf24" opacity="0.4"/>
+            <rect x="5" y="11" width="1" height="1" fill="#6366f1" opacity="0.45"/>
+            <!-- Hidden→Output connections -->
+            <!-- h-1 → out-1 -->
+            <rect x="9" y="1" width="1" height="1" fill="#22c55e" opacity="0.55"/>
+            <rect x="10" y="2" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <rect x="12" y="3" width="1" height="1" fill="#a855f7" opacity="0.55"/>
+            <!-- h-2 → out-1 -->
+            <rect x="9" y="4" width="1" height="1" fill="#14b8a6" opacity="0.5"/>
+            <rect x="11" y="4" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <!-- h-3 → out-2 -->
+            <rect x="9" y="8" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+            <rect x="11" y="8" width="1" height="1" fill="#ec4899" opacity="0.5"/>
+            <rect x="12" y="9" width="1" height="1" fill="#ec4899" opacity="0.55"/>
+            <!-- h-4 → out-2 -->
+            <rect x="9" y="12" width="1" height="1" fill="#6366f1" opacity="0.5"/>
+            <rect x="11" y="11" width="1" height="1" fill="#ec4899" opacity="0.45"/>
         </svg>
     </div>
 
@@ -529,13 +641,15 @@
         <div class="section-divider"></div>
         <div class="glass-card">
             <div class="card-pixel">
-                <svg width="24" height="20" viewBox="0 0 6 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="4" width="1" height="1" fill="#a78bfa"/>
-                    <rect x="1" y="3" width="1" height="2" fill="#a78bfa"/>
-                    <rect x="2" y="1" width="1" height="4" fill="#6c63ff"/>
-                    <rect x="3" y="2" width="1" height="3" fill="#6c63ff"/>
-                    <rect x="4" y="0" width="1" height="5" fill="#7c3aed"/>
-                    <rect x="5" y="1" width="1" height="4" fill="#a78bfa"/>
+                <!-- tiny pixel bar chart (rainbow) -->
+                <svg width="28" height="20" viewBox="0 0 7 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="4" width="1" height="1" fill="#ef4444"/>
+                    <rect x="1" y="3" width="1" height="2" fill="#f97316"/>
+                    <rect x="2" y="1" width="1" height="4" fill="#fbbf24"/>
+                    <rect x="3" y="2" width="1" height="3" fill="#22c55e"/>
+                    <rect x="4" y="0" width="1" height="5" fill="#3b82f6"/>
+                    <rect x="5" y="1" width="1" height="4" fill="#6366f1"/>
+                    <rect x="6" y="2" width="1" height="3" fill="#a855f7"/>
                 </svg>
             </div>
             <h2>Research</h2>
@@ -544,33 +658,87 @@
     </div>
 </section>
 
-<!-- ══ PUBLICATIONS ══ -->
-<section class="section publications" id="publications">
-    <div class="publications-bg-orb"></div>
 
+<!-- ══════════════════════════════════════
+     PUBLICATIONS
+══════════════════════════════════════ -->
+<section class="section publications" id="publications">
+    <div class="section-bg-orb orb-pubs"></div>
+
+    <!-- 📊 GRAPH MODELING — right accent -->
     <div class="section-pixel-right">
-        <svg width="52" height="64" viewBox="0 0 13 16" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-            <!-- Pixel open book -->
-            <rect x="0" y="1" width="6" height="12" fill="#fbbf24"/>
-            <rect x="7" y="1" width="6" height="12" fill="#fbbf24"/>
-            <rect x="1" y="2" width="4" height="10" fill="#fffbeb"/>
-            <rect x="8" y="2" width="4" height="10" fill="#fffbeb"/>
-            <rect x="6" y="0" width="1" height="14" fill="#92400e"/>
-            <!-- lines of text left page -->
-            <rect x="2" y="4" width="3" height="1" fill="#6c63ff"/>
-            <rect x="2" y="6" width="3" height="1" fill="#d1d5db"/>
-            <rect x="2" y="8" width="2" height="1" fill="#d1d5db"/>
-            <rect x="2" y="10" width="3" height="1" fill="#d1d5db"/>
-            <!-- lines of text right page -->
-            <rect x="8" y="4" width="3" height="1" fill="#6c63ff"/>
-            <rect x="8" y="6" width="3" height="1" fill="#d1d5db"/>
-            <rect x="8" y="8" width="2" height="1" fill="#d1d5db"/>
-            <rect x="8" y="10" width="3" height="1" fill="#d1d5db"/>
-            <!-- bottom spine shadow -->
-            <rect x="0" y="13" width="13" height="1" fill="#d97706"/>
-            <!-- dog-ear corner -->
-            <rect x="10" y="2" width="2" height="2" fill="#fbbf24"/>
-            <rect x="11" y="2" width="1" height="1" fill="#fef3c7"/>
+        <svg width="64" height="56" viewBox="0 0 16 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Nodes at various positions -->
+            <rect x="0" y="0" width="3" height="3" fill="#ef4444"/>
+            <rect x="13" y="0" width="3" height="3" fill="#22c55e"/>
+            <rect x="6" y="1" width="3" height="3" fill="#f97316"/>
+            <rect x="0" y="10" width="3" height="3" fill="#3b82f6"/>
+            <rect x="13" y="10" width="3" height="3" fill="#a855f7"/>
+            <rect x="6" y="11" width="3" height="3" fill="#ec4899"/>
+            <rect x="6" y="6" width="3" height="2" fill="#fbbf24"/>  <!-- center hub -->
+            <!-- Edge: top-left → center-top -->
+            <rect x="3" y="1" width="1" height="1" fill="#ef4444" opacity="0.55"/>
+            <rect x="4" y="1" width="1" height="1" fill="#f97316" opacity="0.5"/>
+            <rect x="5" y="1" width="1" height="1" fill="#f97316" opacity="0.55"/>
+            <!-- Edge: top-right → center-top -->
+            <rect x="9" y="1" width="1" height="1" fill="#f97316" opacity="0.55"/>
+            <rect x="10" y="1" width="1" height="1" fill="#22c55e" opacity="0.5"/>
+            <rect x="11" y="1" width="1" height="1" fill="#22c55e" opacity="0.55"/>
+            <!-- Edge: center-top → center-hub -->
+            <rect x="7" y="4" width="1" height="1" fill="#f97316" opacity="0.6"/>
+            <rect x="7" y="5" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+            <!-- Edge: top-left → bot-left -->
+            <rect x="1" y="3" width="1" height="1" fill="#ef4444" opacity="0.5"/>
+            <rect x="1" y="5" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
+            <rect x="0" y="7" width="1" height="1" fill="#3b82f6" opacity="0.45"/>
+            <rect x="1" y="9" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+            <!-- Edge: top-right → bot-right -->
+            <rect x="14" y="3" width="1" height="1" fill="#22c55e" opacity="0.4"/>
+            <rect x="15" y="5" width="1" height="1" fill="#a855f7" opacity="0.4"/>
+            <rect x="14" y="7" width="1" height="1" fill="#a855f7" opacity="0.4"/>
+            <rect x="14" y="9" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <!-- Edge: center-hub → center-bot -->
+            <rect x="7" y="8" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
+            <rect x="7" y="9" width="1" height="1" fill="#ec4899" opacity="0.55"/>
+            <rect x="7" y="10" width="1" height="1" fill="#ec4899" opacity="0.6"/>
+            <!-- Edge: bot-left → center-bot -->
+            <rect x="3" y="11" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
+            <rect x="4" y="11" width="1" height="1" fill="#ec4899" opacity="0.45"/>
+            <rect x="5" y="11" width="1" height="1" fill="#ec4899" opacity="0.5"/>
+            <!-- Edge: bot-right → center-bot -->
+            <rect x="12" y="11" width="1" height="1" fill="#a855f7" opacity="0.5"/>
+            <rect x="10" y="11" width="1" height="1" fill="#ec4899" opacity="0.45"/>
+            <rect x="9" y="11" width="1" height="1" fill="#ec4899" opacity="0.5"/>
+        </svg>
+    </div>
+
+    <!-- 📖 OPEN BOOK (Publications theme) — left accent -->
+    <div class="section-pixel-left">
+        <svg width="60" height="52" viewBox="0 0 15 13" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Left page -->
+            <rect x="0" y="1" width="6" height="11" fill="#fef3c7"/>
+            <rect x="1" y="2" width="4" height="9" fill="#fffbeb"/>
+            <!-- Right page -->
+            <rect x="9" y="1" width="6" height="11" fill="#fef3c7"/>
+            <rect x="10" y="2" width="4" height="9" fill="#fffbeb"/>
+            <!-- Spine -->
+            <rect x="6" y="0" width="3" height="13" fill="#d97706"/>
+            <rect x="7" y="0" width="1" height="13" fill="#92400e"/>
+            <!-- Text lines — left page (rainbow) -->
+            <rect x="2" y="3" width="3" height="1" fill="#ef4444"/>
+            <rect x="2" y="5" width="3" height="1" fill="#f97316"/>
+            <rect x="2" y="7" width="2" height="1" fill="#fbbf24"/>
+            <rect x="2" y="9" width="3" height="1" fill="#22c55e"/>
+            <!-- Text lines — right page (rainbow) -->
+            <rect x="10" y="3" width="3" height="1" fill="#3b82f6"/>
+            <rect x="10" y="5" width="3" height="1" fill="#6366f1"/>
+            <rect x="10" y="7" width="2" height="1" fill="#a855f7"/>
+            <rect x="10" y="9" width="3" height="1" fill="#ec4899"/>
+            <!-- Dog-ear -->
+            <rect x="12" y="1" width="3" height="3" fill="#fef3c7"/>
+            <rect x="13" y="1" width="2" height="2" fill="#fbbf24"/>
+            <!-- Bottom shadow -->
+            <rect x="0" y="12" width="15" height="1" fill="#d97706"/>
         </svg>
     </div>
 
@@ -579,11 +747,13 @@
         <div class="section-divider"></div>
         <div class="glass-card">
             <div class="card-pixel">
-                <svg width="24" height="16" viewBox="0 0 6 4" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0" y="0" width="6" height="1" fill="#6c63ff"/>
-                    <rect x="0" y="1" width="4" height="1" fill="#a78bfa"/>
-                    <rect x="0" y="2" width="5" height="1" fill="#a78bfa"/>
-                    <rect x="0" y="3" width="3" height="1" fill="#c4b5fd"/>
+                <!-- rainbow stack of papers -->
+                <svg width="24" height="20" viewBox="0 0 6 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="0" width="5" height="1" fill="#ef4444"/>
+                    <rect x="0" y="1" width="5" height="1" fill="#f97316"/>
+                    <rect x="0" y="2" width="5" height="1" fill="#22c55e"/>
+                    <rect x="0" y="3" width="5" height="1" fill="#3b82f6"/>
+                    <rect x="0" y="4" width="5" height="1" fill="#a855f7"/>
                 </svg>
             </div>
             <h2>Publications</h2>
@@ -592,13 +762,28 @@
     </div>
 </section>
 
-<!-- ══ CONTACT ══ -->
+
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
 <section class="section contact" id="contact">
     <div class="section-content reveal">
         <p class="section-label">04 — Find Me</p>
         <div class="section-divider"></div>
         <h2>External Links</h2>
         <p>Connect with me across the web.</p>
+
+        <!-- tiny rainbow pixel sparkle row -->
+        <div style="display:flex; justify-content:center; gap:6px; margin: 1.5rem 0 0.5rem;">
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#ef4444"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#f97316"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#fbbf24"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#22c55e"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#3b82f6"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#a855f7"/></svg>
+            <svg width="8" height="8" viewBox="0 0 2 2" class="pixel-art" xmlns="http://www.w3.org/2000/svg"><rect width="2" height="2" fill="#ec4899"/></svg>
+        </div>
+
         <div class="contact-icons">
             <!-- LinkedIn -->
             <a href="https://www.linkedin.com/in/link-tejavibulya/" target="_blank" class="contact-icon" title="LinkedIn">
@@ -616,33 +801,31 @@
     </div>
 </section>
 
-<script>
-    // Scroll progress + back-to-top
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.offsetHeight - window.innerHeight;
-        document.getElementById('scrollProgress').style.width = (scrollTop / docHeight * 100) + '%';
-        const btn = document.getElementById('backToTop');
-        scrollTop > 300 ? btn.classList.add('visible') : btn.classList.remove('visible');
-    });
 
+<script>
+    // Scroll progress bar + back to top
+    window.addEventListener('scroll', () => {
+        const st = window.pageYOffset;
+        const dh = document.body.offsetHeight - window.innerHeight;
+        document.getElementById('scrollProgress').style.width = (st / dh * 100) + '%';
+        const btn = document.getElementById('backToTop');
+        st > 300 ? btn.classList.add('visible') : btn.classList.remove('visible');
+    });
     function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
     // Parallax layers
     window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        document.querySelectorAll('.parallax-layer[data-speed]').forEach(layer => {
-            const speed = parseFloat(layer.dataset.speed);
-            layer.style.transform = `translateY(${scrolled * speed}px)`;
+        const s = window.pageYOffset;
+        document.querySelectorAll('.parallax-layer[data-speed]').forEach(l => {
+            l.style.transform = `translateY(${s * parseFloat(l.dataset.speed)}px)`;
         });
     });
 
-    // Reveal on scroll
-    const observer = new IntersectionObserver((entries) => {
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
