@@ -269,6 +269,85 @@
             .orb-2, .orb-3 { display: none; }
             .hero-pixel-left, .hero-pixel-right { display: none; }
         }
+
+        /* ── Profile Photo ── */
+        .profile-pic-wrapper {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.10);
+            flex-shrink: 0;
+        }
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            opacity: 0.65;
+            transition: opacity 0.35s ease;
+            display: block;
+        }
+        .profile-pic:hover { opacity: 1; }
+
+        /* ── Publications in Research ── */
+        .pub-list { margin-top: 2rem; }
+        .pub-year-section { margin-bottom: 2.2rem; }
+        .pub-year-header {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #bbb;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+        }
+        .pub-item { margin-bottom: 1.6rem; }
+        .pub-item:last-child { margin-bottom: 0; }
+        .pub-title { font-weight: 600; font-size: 0.97rem; color: #1a1a2e; line-height: 1.45; margin-bottom: 0.28rem; }
+        .pub-authors { font-size: 0.87rem; color: #666; line-height: 1.65; margin-bottom: 0.18rem; }
+        .pub-journal { font-size: 0.84rem; color: #999; }
+
+        /* ── CV Section ── */
+        .cv { background: #fafafa; }
+        .orb-cv {
+            width: 440px; height: 440px; top: 50%; left: -110px; transform: translateY(-50%);
+            background: radial-gradient(circle, rgba(168,85,247,0.04) 0%, transparent 70%);
+        }
+        .cv-block { margin-bottom: 2.4rem; }
+        .cv-block:last-child { margin-bottom: 0; }
+        .cv-block-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+        }
+        .cv-entry {
+            display: grid;
+            grid-template-columns: 145px 1fr;
+            gap: 0.25rem 1.2rem;
+            margin-bottom: 1.1rem;
+            align-items: start;
+        }
+        .cv-entry:last-child { margin-bottom: 0; }
+        .cv-date { font-size: 0.83rem; color: #bbb; font-weight: 500; padding-top: 0.1rem; }
+        .cv-label { font-weight: 600; font-size: 0.95rem; color: #1a1a2e; margin-bottom: 0.05rem; }
+        .cv-sub { font-size: 0.88rem; color: #777; }
+
+        @media (max-width: 600px) {
+            .profile-pic-wrapper { width: 80px; height: 80px; top: 1rem; right: 1rem; }
+            .cv-entry { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -422,7 +501,7 @@
         <nav class="nav-menu">
             <a href="#about" class="nav-link">About Me</a>
             <a href="#research" class="nav-link">Research</a>
-            <a href="#publications" class="nav-link">Publications</a>
+            <a href="#cv" class="nav-link">CV</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </div>
@@ -510,6 +589,10 @@
         <p class="section-label">01 — Who I Am</p>
         <div class="section-divider"></div>
         <div class="glass-card">
+            <!-- Profile picture — top right corner -->
+            <div class="profile-pic-wrapper">
+                <img src="images/profile.jpg" alt="Link Tejavibulya" class="profile-pic">
+            </div>
             <div class="card-pixel">
                 <!-- tiny pixel star -->
                 <svg width="20" height="20" viewBox="0 0 5 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
@@ -525,7 +608,8 @@
                 </svg>
             </div>
             <h2>About Me</h2>
-            <p>About me</p>
+            <p style="font-size:1.05rem; line-height:1.8; color:#555; margin-bottom:0.6rem; max-width:580px;">Hi, I'm Link!</p>
+            <p style="font-size:1.05rem; line-height:1.8; color:#555; max-width:580px;">I'm currently a <em>postdoctoral research scientist</em> at <strong>Weill Cornell Medicine</strong> and <strong>Cornell Tech</strong>. My research is focused on using AI and machine learning methods to advance neuroscience research. Please check out my <a href="#research" style="color:#3b82f6; text-decoration:none; font-weight:500;">Research</a> page for more.</p>
         </div>
     </div>
 </section>
@@ -653,111 +737,319 @@
                 </svg>
             </div>
             <h2>Research</h2>
-            <p>Research</p>
+            <p style="font-size:1rem; line-height:1.8; color:#555; margin-bottom:0.5rem;">Using AI and machine learning to advance our understanding of the brain.</p>
+
+            <div class="pub-list">
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2026</div>
+                <div class="pub-item">
+                  <p class="pub-title">Feature selection leads to divergent neurobiological interpretations of brain-based machine learning biomarkers</p>
+                  <p class="pub-authors">B.D. Adkinson, M. Rosenblatt, H. Sun, J. Dadashkarimi, <u>Link Tejavibulya</u>, C. Horien, M.L. Westwater, R.X. Rodriguez, S. Noble, D. Scheinost</p>
+                  <p class="pub-journal"><em>Nature Human Behaviour, 2026</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Do in-scanner tasks outperform rest for predicting autistic traits using functional connectivity data?</p>
+                  <p class="pub-authors">C. Horien, F. Mandino, A.S. Greene, X. Shen, K. Powell, A. Vernetti, D. O'Connor, B.D. Adkinson, <u>Link Tejavibulya</u>, J.C. McPartland, F.R. Volkmar, M. Chun, K. Chawarska, E.M.R. Lake, M. Rosenberg, T. Satterthwaite, D. Scheinost, E. Finn, R.T. Constable</p>
+                  <p class="pub-journal"><em>Nature Mental Health, 2026</em></p>
+                </div>
+              </div>
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2025</div>
+                <div class="pub-item">
+                  <p class="pub-title">External validation improves generalizability, replicability, and reproducibility in neuroimaging predictive models</p>
+                  <p class="pub-authors">M. Rosenblatt, M.L. Foster, B.D. Adkinson, <u>Link Tejavibulya</u>, M. Khaitova, J. Ye, H. Sun, R.X. Rodriguez, C.C. Camp, A. Chinta, M.C. McCusker, C.T. Fields, S. Mehta, D. Scheinost</p>
+                  <p class="pub-journal"><em>Nature Methods, 2025</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Variation in moment-to-moment brain state engagement changes across development and contributes to individual differences in executive function</p>
+                  <p class="pub-authors">J. Ye, <u>Link Tejavibulya</u>, W. Dai, L.M. Cope, J.E. Hardee, M.M. Heitzeg, S. Lichenstein, S.W. Yip, T. Banaschewski, G.J. Baker, A.L.W. Bokde, R. Brühl, S. Desrivières, H. Flor, P. Gowland, A. Grigis, A. Heinz, J.-L. Martinot, M.-L. Paillère Martinot, E. Artiges, F. Nees, D. Papadopoulos Orfanos, L. Poustka, S. Hohmann, N. Holz, C. Baeuchl, M.N. Smolka, N. Vaidya, H. Walter, R. Whelan, G. Schumann, H. Garavan, B. Chaarani, D.G. Gee, A. Baskin-Sommers, B.J. Casey, IMAGEN Consortium, D. Scheinost</p>
+                  <p class="pub-journal"><em>Neuron, 2025</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">BrainEffeX: A web app for exploring fMRI effect sizes</p>
+                  <p class="pub-authors">H. Shearer, M. Rosenblatt, J. Ye, R. Jiang, <u>Link Tejavibulya</u>, Q. Liang, J. Dadashkarimi, M.L. Westwater, I. Cheng, A. Fischbach, A. Humphries, A.K. Baskaran, M.J. Rolison, H. Peterson, B.D. Adkinson, S. Mehta, C. Camp, T.E. Nichols, J. Curtiss, D. Scheinost, S. Noble</p>
+                  <p class="pub-journal"><em>Aperture Neuro, 2025</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Brain-handedness associations depend on how and when handedness is measured</p>
+                  <p class="pub-authors"><u>Link Tejavibulya</u>, C. Horien, C. Fredricks, B. Ficek, M.L. Westwater, D. Scheinost</p>
+                  <p class="pub-journal"><em>Scientific Reports, 2025</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Functional connectome correlates of laterality preferences: Insights into Hand, Foot, and Eye Dominance Across the Lifespan</p>
+                  <p class="pub-authors"><u>Link Tejavibulya</u>, C. Horien, C. Fredricks, B. Ficek, M.L. Westwater, D. Scheinost</p>
+                  <p class="pub-journal"><em>eNeuro, 2025</em></p>
+                </div>
+              </div>
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2024</div>
+                <div class="pub-item">
+                  <p class="pub-title">Dataset shifts in developmental populations</p>
+                  <p class="pub-authors">B.D. Adkinson, M. Rosenblatt, J. Dadashkarimi, <u>Link Tejavibulya</u>, R. Jiang, S. Noble, D. Scheinost</p>
+                  <p class="pub-journal"><em>Developmental Cognitive Neuroscience, 2024</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Power and reproducibility in the external validation of brain-phenotype relationships</p>
+                  <p class="pub-authors">M. Rosenblatt, <u>Link Tejavibulya</u>, C. Camp, R. Jiang, M.L. Westwater, S. Noble, D. Scheinost</p>
+                  <p class="pub-journal"><em>Nature Human Behaviour, 2024</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Edge-centric network control on the human brain structural network</p>
+                  <p class="pub-authors">H. Sun, M. Rosenblatt, J. Dadashkarimi, R.X. Rodriguez, <u>Link Tejavibulya</u>, D. Scheinost</p>
+                  <p class="pub-journal"><em>Imaging Neuroscience, 2024</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Data leakage inflates prediction performance in connectome-based machine learning models</p>
+                  <p class="pub-authors">M. Rosenblatt, <u>Link Tejavibulya</u>, R. Jiang, S. Noble, D. Scheinost</p>
+                  <p class="pub-journal"><em>Nature Communications, 2024</em></p>
+                </div>
+              </div>
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2023</div>
+                <div class="pub-item">
+                  <p class="pub-title">Cross Atlas Remapping via Optimal Transport (CAROT): Creating connectomes for different atlases when raw data is not available</p>
+                  <p class="pub-authors">J. Dadashkarimi, A. Karbasi, Q. Liang, M. Rosenblatt, S. Noble, M. Foster, R. Rodriguez, B. Adkinson, J. Ye, H. Sun, C. Camp, M. Farruggia, <u>Link Tejavibulya</u>, W. Dai, R. Jiang, A. Pollatou, D. Scheinost</p>
+                  <p class="pub-journal"><em>Medical Image Analysis, 2023</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Heightened sensitivity to high-calorie foods in children at risk for obesity: Insights from behavior, neuroimaging, and genetics</p>
+                  <p class="pub-authors">K.M. Rapuano, <u>Link Tejavibulya</u>, E.N. Dinc, A. Li, T. Teslovich, M. Rosenbaum, B.J. Casey, L. Mayer</p>
+                  <p class="pub-journal"><em>Brain Imaging and Behavior, 2023</em></p>
+                </div>
+              </div>
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2022</div>
+                <div class="pub-item">
+                  <p class="pub-title">Leveraging edge-centric networks complements existing network-level inference for functional connectomes</p>
+                  <p class="pub-authors">R.X. Rodriguez, S. Noble, <u>Link Tejavibulya</u>, D. Scheinost</p>
+                  <p class="pub-journal"><em>NeuroImage, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Machine learning and prediction in fetal, infant, and toddler neuroimaging: a review and primer</p>
+                  <p class="pub-authors">D. Scheinost, A. Pollatou, A.J. Dufford, R. Jiang, M.C. Farruggia, M. Rosenblatt, H. Peterson, R.X. Rodriguez, J. Dadashkarimi, Q. Liang, W. Dai, M.L. Foster, C.C. Camp, <u>Link Tejavibulya</u>, B.D. Adkinson, H. Sun, J. Ye, Q. Cheng, M.N. Spann, C.A. Hahn, M. Rolison, S. Noble, M.L. Westwater</p>
+                  <p class="pub-journal"><em>Biological Psychiatry, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Foxa2 and Pet1 direct and indirect synergy drive serotonergic neuronal differentiation</p>
+                  <p class="pub-authors">B. Aydin, M. Sierk, M. Moreno-Estella, <u>Link Tejavibulya</u>, N. Kumar, N. Flames, S. Mahony, E.O. Mazzoni</p>
+                  <p class="pub-journal"><em>Frontiers in Neuroscience, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Predicting the future of neuroimaging predictive models in mental health</p>
+                  <p class="pub-authors"><u>Link Tejavibulya</u>, M. Rolison, S. Gao, Q. Liang, H. Peterson, J. Dadashkarimi, M.C. Farruggia, C.A. Hahn, S. Noble, S. Lichenstein, A. Pollatou, A.J. Dufford, D. Scheinost</p>
+                  <p class="pub-journal"><em>Molecular Psychiatry, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Functional connectome-based predictive modelling in autism spectrum disorder</p>
+                  <p class="pub-authors">C. Horien, D.L. Floris, A.S. Greene, S. Noble, M. Rolison, <u>Link Tejavibulya</u>, D. O'Connor, J.C. McPartland, D. Scheinost, K. Chawarska, E.M.R. Lake, R.T. Constable</p>
+                  <p class="pub-journal"><em>Biological Psychiatry, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">Large-scale differences in functional organization of left- and right-handed individuals using whole-brain, data-driven analysis of connectivity</p>
+                  <p class="pub-authors"><u>Link Tejavibulya</u>, H. Peterson, A. Greene, S. Gao, S. Noble, M. Rolison, D. Scheinost</p>
+                  <p class="pub-journal"><em>NeuroImage, 2022</em></p>
+                </div>
+                <div class="pub-item">
+                  <p class="pub-title">A protocol for working with open-source neuroimaging datasets</p>
+                  <p class="pub-authors">C. Horien, K. Lee, M.L. Westwater, S. Noble, <u>Link Tejavibulya</u>, T. Kayani, R.T. Constable, D. Scheinost</p>
+                  <p class="pub-journal"><em>STAR Protocols, 2022</em></p>
+                </div>
+              </div>
+
+              <div class="pub-year-section">
+                <div class="pub-year-header">2020</div>
+                <div class="pub-item" style="margin-bottom:0;">
+                  <p class="pub-title">Big data approaches to identifying sex differences in long-term memory</p>
+                  <p class="pub-authors"><u>Link Tejavibulya</u>, D. Scheinost</p>
+                  <p class="pub-journal"><em>Cognitive Neuroscience, 2020</em></p>
+                </div>
+              </div>
+
+            </div>
         </div>
     </div>
 </section>
 
 
 <!-- ══════════════════════════════════════
-     PUBLICATIONS
+     CV
 ══════════════════════════════════════ -->
-<section class="section publications" id="publications">
-    <div class="section-bg-orb orb-pubs"></div>
+<section class="section cv" id="cv">
+    <div class="section-bg-orb orb-cv"></div>
 
-    <!-- 📊 GRAPH MODELING — right accent -->
+    <!-- 🎓 DIPLOMA — right accent -->
     <div class="section-pixel-right">
         <svg width="64" height="56" viewBox="0 0 16 14" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-            <!-- Nodes at various positions -->
-            <rect x="0" y="0" width="3" height="3" fill="#ef4444"/>
-            <rect x="13" y="0" width="3" height="3" fill="#22c55e"/>
-            <rect x="6" y="1" width="3" height="3" fill="#f97316"/>
-            <rect x="0" y="10" width="3" height="3" fill="#3b82f6"/>
-            <rect x="13" y="10" width="3" height="3" fill="#a855f7"/>
-            <rect x="6" y="11" width="3" height="3" fill="#ec4899"/>
-            <rect x="6" y="6" width="3" height="2" fill="#fbbf24"/>  <!-- center hub -->
-            <!-- Edge: top-left → center-top -->
-            <rect x="3" y="1" width="1" height="1" fill="#ef4444" opacity="0.55"/>
-            <rect x="4" y="1" width="1" height="1" fill="#f97316" opacity="0.5"/>
-            <rect x="5" y="1" width="1" height="1" fill="#f97316" opacity="0.55"/>
-            <!-- Edge: top-right → center-top -->
-            <rect x="9" y="1" width="1" height="1" fill="#f97316" opacity="0.55"/>
-            <rect x="10" y="1" width="1" height="1" fill="#22c55e" opacity="0.5"/>
-            <rect x="11" y="1" width="1" height="1" fill="#22c55e" opacity="0.55"/>
-            <!-- Edge: center-top → center-hub -->
-            <rect x="7" y="4" width="1" height="1" fill="#f97316" opacity="0.6"/>
-            <rect x="7" y="5" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
-            <!-- Edge: top-left → bot-left -->
-            <rect x="1" y="3" width="1" height="1" fill="#ef4444" opacity="0.5"/>
-            <rect x="1" y="5" width="1" height="1" fill="#3b82f6" opacity="0.4"/>
-            <rect x="0" y="7" width="1" height="1" fill="#3b82f6" opacity="0.45"/>
-            <rect x="1" y="9" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
-            <!-- Edge: top-right → bot-right -->
-            <rect x="14" y="3" width="1" height="1" fill="#22c55e" opacity="0.4"/>
-            <rect x="15" y="5" width="1" height="1" fill="#a855f7" opacity="0.4"/>
-            <rect x="14" y="7" width="1" height="1" fill="#a855f7" opacity="0.4"/>
-            <rect x="14" y="9" width="1" height="1" fill="#a855f7" opacity="0.5"/>
-            <!-- Edge: center-hub → center-bot -->
-            <rect x="7" y="8" width="1" height="1" fill="#fbbf24" opacity="0.6"/>
-            <rect x="7" y="9" width="1" height="1" fill="#ec4899" opacity="0.55"/>
-            <rect x="7" y="10" width="1" height="1" fill="#ec4899" opacity="0.6"/>
-            <!-- Edge: bot-left → center-bot -->
-            <rect x="3" y="11" width="1" height="1" fill="#3b82f6" opacity="0.5"/>
-            <rect x="4" y="11" width="1" height="1" fill="#ec4899" opacity="0.45"/>
-            <rect x="5" y="11" width="1" height="1" fill="#ec4899" opacity="0.5"/>
-            <!-- Edge: bot-right → center-bot -->
-            <rect x="12" y="11" width="1" height="1" fill="#a855f7" opacity="0.5"/>
-            <rect x="10" y="11" width="1" height="1" fill="#ec4899" opacity="0.45"/>
-            <rect x="9" y="11" width="1" height="1" fill="#ec4899" opacity="0.5"/>
+            <!-- Scroll body -->
+            <rect x="1" y="2" width="14" height="10" fill="#fef3c7"/>
+            <!-- Scroll ends (rolled) -->
+            <rect x="0" y="1" width="2" height="12" fill="#fbbf24"/>
+            <rect x="14" y="1" width="2" height="12" fill="#fbbf24"/>
+            <!-- Text lines (rainbow) -->
+            <rect x="3" y="4" width="9" height="1" fill="#ef4444"/>
+            <rect x="3" y="6" width="7" height="1" fill="#3b82f6"/>
+            <rect x="3" y="8" width="8" height="1" fill="#22c55e"/>
+            <rect x="3" y="10" width="5" height="1" fill="#a855f7"/>
+            <!-- Seal -->
+            <rect x="10" y="9" width="3" height="3" fill="#f97316"/>
+            <rect x="11" y="9" width="1" height="3" fill="#fbbf24"/>
+            <rect x="10" y="10" width="3" height="1" fill="#fbbf24"/>
         </svg>
     </div>
 
-    <!-- 📖 OPEN BOOK (Publications theme) — left accent -->
+    <!-- 🏆 TROPHY — left accent -->
     <div class="section-pixel-left">
-        <svg width="60" height="52" viewBox="0 0 15 13" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-            <!-- Left page -->
-            <rect x="0" y="1" width="6" height="11" fill="#fef3c7"/>
-            <rect x="1" y="2" width="4" height="9" fill="#fffbeb"/>
-            <!-- Right page -->
-            <rect x="9" y="1" width="6" height="11" fill="#fef3c7"/>
-            <rect x="10" y="2" width="4" height="9" fill="#fffbeb"/>
-            <!-- Spine -->
-            <rect x="6" y="0" width="3" height="13" fill="#d97706"/>
-            <rect x="7" y="0" width="1" height="13" fill="#92400e"/>
-            <!-- Text lines — left page (rainbow) -->
-            <rect x="2" y="3" width="3" height="1" fill="#ef4444"/>
-            <rect x="2" y="5" width="3" height="1" fill="#f97316"/>
-            <rect x="2" y="7" width="2" height="1" fill="#fbbf24"/>
-            <rect x="2" y="9" width="3" height="1" fill="#22c55e"/>
-            <!-- Text lines — right page (rainbow) -->
-            <rect x="10" y="3" width="3" height="1" fill="#3b82f6"/>
-            <rect x="10" y="5" width="3" height="1" fill="#6366f1"/>
-            <rect x="10" y="7" width="2" height="1" fill="#a855f7"/>
-            <rect x="10" y="9" width="3" height="1" fill="#ec4899"/>
-            <!-- Dog-ear -->
-            <rect x="12" y="1" width="3" height="3" fill="#fef3c7"/>
-            <rect x="13" y="1" width="2" height="2" fill="#fbbf24"/>
-            <!-- Bottom shadow -->
-            <rect x="0" y="12" width="15" height="1" fill="#d97706"/>
+        <svg width="52" height="60" viewBox="0 0 13 15" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cup -->
+            <rect x="3" y="0" width="7" height="1" fill="#fbbf24"/>
+            <rect x="2" y="1" width="9" height="5" fill="#fbbf24"/>
+            <rect x="3" y="6" width="7" height="1" fill="#f97316"/>
+            <!-- Handles -->
+            <rect x="0" y="2" width="2" height="3" fill="#f97316"/>
+            <rect x="11" y="2" width="2" height="3" fill="#f97316"/>
+            <!-- Stem -->
+            <rect x="5" y="7" width="3" height="3" fill="#d97706"/>
+            <!-- Base -->
+            <rect x="3" y="10" width="7" height="2" fill="#f97316"/>
+            <rect x="2" y="12" width="9" height="1" fill="#fbbf24"/>
+            <!-- Star in cup -->
+            <rect x="6" y="2" width="1" height="1" fill="#ffffff" opacity="0.7"/>
+            <rect x="5" y="3" width="3" height="1" fill="#ffffff" opacity="0.5"/>
+            <rect x="6" y="4" width="1" height="1" fill="#ffffff" opacity="0.7"/>
         </svg>
     </div>
 
     <div class="section-content reveal">
-        <p class="section-label">03 — My Work</p>
+        <p class="section-label">03 — Curriculum Vitae</p>
         <div class="section-divider"></div>
         <div class="glass-card">
             <div class="card-pixel">
-                <!-- rainbow stack of papers -->
-                <svg width="24" height="20" viewBox="0 0 6 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="1" y="0" width="5" height="1" fill="#ef4444"/>
-                    <rect x="0" y="1" width="5" height="1" fill="#f97316"/>
-                    <rect x="0" y="2" width="5" height="1" fill="#22c55e"/>
-                    <rect x="0" y="3" width="5" height="1" fill="#3b82f6"/>
-                    <rect x="0" y="4" width="5" height="1" fill="#a855f7"/>
+                <!-- tiny pixel star -->
+                <svg width="20" height="20" viewBox="0 0 5 5" class="pixel-art" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="0" width="1" height="1" fill="#fbbf24"/>
+                    <rect x="0" y="2" width="1" height="1" fill="#ef4444"/>
+                    <rect x="4" y="2" width="1" height="1" fill="#3b82f6"/>
+                    <rect x="1" y="1" width="1" height="1" fill="#f97316"/>
+                    <rect x="3" y="1" width="1" height="1" fill="#22c55e"/>
+                    <rect x="2" y="2" width="1" height="1" fill="#a855f7"/>
+                    <rect x="1" y="3" width="1" height="1" fill="#ec4899"/>
+                    <rect x="3" y="3" width="1" height="1" fill="#14b8a6"/>
+                    <rect x="2" y="4" width="1" height="1" fill="#fbbf24"/>
                 </svg>
             </div>
-            <h2>Publications</h2>
-            <p>Publications</p>
+            <h2>CV</h2>
+
+            <!-- Education -->
+            <div class="cv-block">
+                <div class="cv-block-title">Education</div>
+                <div class="cv-entry">
+                    <div class="cv-date">2019 – 2025</div>
+                    <div>
+                        <div class="cv-label">PhD</div>
+                        <div class="cv-sub">Yale University: Graduate School of Arts and Science</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2019 – 2022</div>
+                    <div>
+                        <div class="cv-label">M.Phil.</div>
+                        <div class="cv-sub">Yale University: Graduate School of Arts and Science</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2014 – 2017</div>
+                    <div>
+                        <div class="cv-label">B.A.</div>
+                        <div class="cv-sub">New York University: Gallatin School of Individualized Study</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Appointments -->
+            <div class="cv-block">
+                <div class="cv-block-title">Professional Appointments</div>
+                <div class="cv-entry">
+                    <div class="cv-date">2025 – present</div>
+                    <div>
+                        <div class="cv-label">Postdoctoral Research Scientist</div>
+                        <div class="cv-sub">Weill Cornell Medicine</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2025 – present</div>
+                    <div>
+                        <div class="cv-label">Postdoctoral Research Scientist</div>
+                        <div class="cv-sub">Cornell Tech</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2019 – 2025</div>
+                    <div>
+                        <div class="cv-label">Graduate Research Fellow</div>
+                        <div class="cv-sub">Yale University</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2022 – 2024</div>
+                    <div>
+                        <div class="cv-label">Visiting Researcher</div>
+                        <div class="cv-sub">Columbia University</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2017 – 2019</div>
+                    <div>
+                        <div class="cv-label">Junior Research Scientist</div>
+                        <div class="cv-sub">New York University: Center for Neural Science</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Funding & Awards -->
+            <div class="cv-block">
+                <div class="cv-block-title">Funding &amp; Awards</div>
+                <div class="cv-entry">
+                    <div class="cv-date">2022</div>
+                    <div>
+                        <div class="cv-label">Nathaniel Wharton Fellow</div>
+                        <div class="cv-sub">Columbia University</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2019 – 2022</div>
+                    <div>
+                        <div class="cv-label">Gruber Science Fellow</div>
+                        <div class="cv-sub">Yale University</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2017</div>
+                    <div>
+                        <div class="cv-label">Founder's Day Award</div>
+                        <div class="cv-sub">New York University</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2017</div>
+                    <div>
+                        <div class="cv-label">Dean's Award for Graduating Seniors</div>
+                        <div class="cv-sub">New York University: Gallatin School of Individualized Study</div>
+                    </div>
+                </div>
+                <div class="cv-entry">
+                    <div class="cv-date">2016 – 2017</div>
+                    <div>
+                        <div class="cv-label">Gallatin Undergraduate Research Fund</div>
+                        <div class="cv-sub">New York University: Gallatin School of Individualized Study</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
